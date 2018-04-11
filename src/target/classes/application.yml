@@ -1,0 +1,40 @@
+druid:
+  url:
+  username: root
+  password: 123456
+  maxActive: 20
+  minIdle: 3
+  maxWait: 10000
+  validationQuery: SELECT 'x'
+  timeBetweenEvictionRunsMillis: 60000
+  minEvictableIdleTimeMillis: 300000
+  borrowConnectionTimeout: 30000
+spring:
+  application:
+    name: demo
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: LEGACYHTML5
+    encoding: UTF-8
+    cache: false
+  datasource:
+    url: jdbc:mysql://192.168.1.108:3306/test?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 123456
+    druid:
+      validation-query: select 'x'
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 1800000
+  redis:
+    host: 192.168.1.108
+    port: 6379
+mybatis:
+  mapper-locations: classpath:mapper/*-mapper.xml
+  type-aliases-package: com.hongwei.demo.entity
+  configuration:
+    cache-enabled: false
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+    safe-row-bounds-enabled: false
+    default-statement-timeout: 600

@@ -1,0 +1,27 @@
+<!-- 
+   Welcome to see the “JuLang” application source code.
+   We look forward to your feedback to our program.
+   email -> service@julang.store
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"></script>
+<script>
+    $(function () {
+        var persons = 30000;
+        for(var i=1; i<=persons; i++){
+            $.get("/grab?pid=1&customerId=" + i, function (data) {
+                console.log(data);
+            })
+        }
+    })
+</script>
+</body>
+</html>

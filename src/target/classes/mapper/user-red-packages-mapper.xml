@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongwei.demo.dao.IUserRedPackageMapper">
+    <sql id="fields">
+        pid, customer_id, amount, grab_date
+    </sql>
+
+    <!--插入抢红包信息-->
+    <insert id="grab" useGeneratedKeys="true" keyProperty="upid" parameterType="userRedPackageEntity">
+      INSERT INTO user_red_packages(<include refid="fields"/>,remark) VALUES(
+        #{pid},#{customerId},#{amount},#{grabDate},#{remark}
+        )
+    </insert>
+</mapper>

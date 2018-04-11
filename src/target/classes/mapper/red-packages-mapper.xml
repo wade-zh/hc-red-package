@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hongwei.demo.dao.IRedPackageMapper">
+    <sql id="fields">
+        provide_id,amount,send_date,sub_total,unit_amount,stock
+    </sql>
+
+    <!--查询红包信息-->
+    <select id="select" parameterType="int" resultType="redPackageEntity">
+      SELECT pid,<include refid="fields" />,version,remark
+        FROM red_packages WHERE pid = #{pid}
+    </select>
+
+    <!--查询红包信息-悲观锁-->
+    <select id="selectPessimistic" parameterType="int" resultType="redPackageEntity">
+        SELECT pid,<include refid="fields" />,version,remark
+        FROM red_packages WHERE pid = #{pid} FOR UPDATE
+    </select>
+
+    <!--扣减红包库存-->
+    <update id="reduceStock">
+        UPDATE red_packages SET stock = stock - 1 WHERE pid = ${pid}
+    </update>
+
+
+    <!--扣减红包库存-乐观锁-->
+    <update id="reduceStockOptimistic">
+        UPDATE red_packages SET stock = stock - 1,version = version + 1 WHERE pid = #{pid} AND version = #{version}
+    </update>
+</mapper>
